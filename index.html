@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>Pro Notes</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Identity Services (OAuth 2.0 for Web) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    // Replace with your actual OAuth 2.0 Web Client ID
+    window.APP_CONFIG = {
+      GOOGLE_CLIENT_ID: "1010309962930-tkbe0v8s3dj6ekk79ad9kaev6sgbvent.apps.googleusercontent.com",
+      // Use Drive sync? Set to true to enable the Drive AppData sync UI and flows.
+      ENABLE_DRIVE_SYNC: true
+    };
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">📝</div>
+      <div class="title">Pro Notes</div>
+    </div>
+    <div class="search-wrap">
+      <input id="searchInput" type="search" placeholder="Search notes by title, tag, or content..." />
+    </div>
+    <div class="user-actions">
+      <div id="userInfo" class="user-info hidden">
+        <img id="userAvatar" alt="avatar" class="avatar" />
+        <span id="userName"></span>
+      </div>
+      <button id="signInBtn" class="btn primary">Sign in with Google</button>
+      <button id="signOutBtn" class="btn" style="display:none;">Sign out</button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="section">
+        <button id="newNoteBtn" class="btn primary block">+ New Note</button>
+      </div>
+
+      <div class="section">
+        <h3>Tags</h3>
+        <div id="tagList" class="tag-list"></div>
+      </div>
+
+      <div class="section" id="syncSection" style="display:none;">
+        <h3>Sync</h3>
+        <button id="loadFromDriveBtn" class="btn block">Load from Drive</button>
+        <button id="saveToDriveBtn" class="btn block">Save to Drive</button>
+        <small class="muted">Uses Google Drive AppData (private to this app)</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="note-list-panel">
+        <div class="note-list-header">
+          <h3>Your Notes</h3>
+          <span id="noteCount" class="muted"></span>
+        </div>
+        <ul id="noteList" class="note-list"></ul>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-toolbar">
+          <select id="blockFormat">
+            <option value="P">Paragraph</option>
+            <option value="H1">Heading 1</option>
+            <option value="H2">Heading 2</option>
+            <option value="H3">Heading 3</option>
+          </select>
+          <button class="tool" data-cmd="bold"><b>B</b></button>
+          <button class="tool" data-cmd="italic"><i>I</i></button>
+          <button class="tool" data-cmd="underline"><u>U</u></button>
+          <button class="tool" data-cmd="insertUnorderedList">• List</button>
+          <button class="tool" data-cmd="insertOrderedList">1. List</button>
+          <button class="tool" id="linkBtn">Link</button>
+          <button class="tool" id="clearBtn">Clear</button>
+          <div class="spacer"></div>
+          <button id="deleteNoteBtn" class="btn danger">Delete</button>
+        </div>
+
+        <div class="note-meta">
+          <input id="noteTitle" type="text" placeholder="Note title..." />
+          <input id="noteTags" type="text" placeholder="Tags (comma-separated)..." />
+        </div>
+
+        <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <span class="muted">Pro Notes • Local-first with optional Drive sync</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
