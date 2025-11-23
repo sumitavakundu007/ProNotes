@@ -360,4 +360,4 @@ clearBtn.addEventListener("click", () => {
 // ===== Events =====
 signInBtn.addEventListener("click", () => signIn());
 signOutBtn.addEventListener("click", () => signOut());
-newNoteBtn.addEventListener("click", () => create_
+newNoteBtn.addEventListener("click", () => create_());
